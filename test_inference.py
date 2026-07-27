@@ -1,16 +1,25 @@
-from huggingface_hub import InferenceClient
+from groq import Groq
 
-def chatbot(prompt,hf_token):
+def chatbot(prompt, groq_api_key):
 
-    client=InferenceClient(
-    model="mistralai/Mistral-7B-Instruct-v0.2",
-    token=hf_token
-    )
-    
-    messages=[
-        {"role": "system", "content": "You are a helpful and knowledgeable and intelligent assistant."},
-        {"role": "user","content":prompt }
+    client = Groq(api_key=groq_api_key)
+
+    messages = [
+        {
+            "role": "system",
+            "content": "You are a helpful, knowledgeable and intelligent assistant."
+        },
+        {
+            "role": "user",
+            "content": prompt
+        }
     ]
-    response=client.chat_completion(messages=messages,max_tokens=200,temperature=0.2)
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=messages,
+        temperature=0.2,
+        max_completion_tokens=200
+    )
 
     return response.choices[0].message.content
