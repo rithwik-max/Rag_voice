@@ -1,11 +1,9 @@
 streamlit
-transformers
+python-dotenv
+PyPDF2
 sentence-transformers
 faiss-cpu
-pymupdf
-torch
-PyPDF2
 numpy
-elevenlabs 
-gTTS
-python-dotenv
+gtts
+groq
+huggingface-hub
